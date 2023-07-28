@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 import { globalStyles } from './screens/RegistrationScreen/registrationScreenStyles';
 import { RegistrationScreen } from './screens/RegistrationScreen/RegistrationScreen';
 import { LoginScreen } from './screens/LoginScreen/LoginScreen';
+import { CustomInput } from './components/CustomComponents/CustomInput';
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -19,7 +20,8 @@ export default function App() {
 	return (
 		<ScrollView>
 			<RegistrationScreen />
-			<LoginScreen />
+			{/* <LoginScreen /> */}
+	
 		</ScrollView>
 	);
 }

@@ -1,33 +1,33 @@
-import {
-	TextInput,
-	Text,
-	ScrollView,
-	Button,
-	TouchableOpacity,
-	Image,
-	View,
-	ImageBackground,
-	StyleSheet,
-} from 'react-native';
+import { Text, TouchableOpacity, Image, View, ImageBackground } from 'react-native';
 import { Registration } from './registrationScreenStyles';
 import BgrImage from '../../assets/Photo_BG.png';
 import { useState } from 'react';
+import { CustomInput } from '../../components/CustomComponents/CustomInput';
+import { CustomPasswordInput } from '../../components/CustomComponents/CustomPasswordInput';
+import { OrangeSubmitBtn } from '../../components/CustomComponents/OrangeSubmitBtn';
 
 export const RegistrationScreen = () => {
 	const [showPassword, setShowPassword] = useState(false);
-	// const [onFocus, setOnFocus] = useState(false);
+	const [onFocus, setOnFocus] = useState(false);
+	const [login, setLogin] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
 	const handleShowPassword = () => {
 		setShowPassword(prev => !prev);
 	};
 
-	// const handleOnFocus = () => {
-	// 	setOnFocus(true);
-	// };
+	const handleOnFocus = () => {
+		setOnFocus(true);
+	};
 
-	// const handleOnBlur = () => {
-	// 	setOnFocus(false);
-	// }
+	const handleOnBlur = () => {
+		setOnFocus(false);
+	};
+
+	const handleRegistrationPress = () => {
+		console.log('Кнопка нажата!');
+	};
 
 	return (
 		<View>
@@ -39,33 +39,39 @@ export const RegistrationScreen = () => {
 				<View style={Registration.form}>
 					<Text style={Registration.title}>Реєстрація</Text>
 
-					<TextInput
-						// style={onFocus ? Registration.inputFocus : Registration.input}
-						style={Registration.input}
-						placeholderTextColor="#BDBDBD"
+					<CustomInput
 						placeholder="Логін"
-						// onFocus={handleOnFocus}
-						// onBlur={handleOnBlur}
+						onFocus={handleOnFocus}
+						handleOnBlur={handleOnBlur}
+						handleOnFocus={handleOnFocus}
+						value={login}
+						setValue={setLogin}
 					/>
-					<TextInput
-						style={Registration.input}
-						placeholderTextColor="#BDBDBD"
+
+					<CustomInput
 						placeholder="Адреса електронної пошти"
+						onFocus={handleOnFocus}
+						handleOnBlur={handleOnBlur}
+						handleOnFocus={handleOnFocus}
+						value={email}
+						setValue={setEmail}
 					/>
-					<TextInput
-						style={{ ...Registration.input, marginBottom: 45 }}
-						placeholderTextColor="#BDBDBD"
+					<CustomPasswordInput
 						placeholder="Пароль"
-						secureTextEntry={!showPassword}
+						handleOnBlur={handleOnBlur}
+						onFocus={onFocus}
+						handleOnFocus={handleOnFocus}
+						showPassword={showPassword}
+						handleShowPassword={handleShowPassword}
+						value={password}
+						setValue={setPassword}
 					/>
-					<TouchableOpacity onPress={handleShowPassword}>
-						<Text style={Registration.showPasswordText}>
-							{showPassword ? 'Приховати' : 'Показати'}
-						</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={Registration.button}>
-						<Text style={Registration.btnDescr}>Зареєстуватися</Text>
-					</TouchableOpacity>
+
+					<OrangeSubmitBtn
+						text="Зареєстуватися"
+						handlePress={handleRegistrationPress}
+					/>
+
 					<TouchableOpacity>
 						<Text style={Registration.linkToLogin}>Вже є акаунт? Увійти</Text>
 					</TouchableOpacity>

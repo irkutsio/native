@@ -1,17 +1,10 @@
-import {
-	TextInput,
-	Text,
-	ScrollView,
-	Button,
-	TouchableOpacity,
-	Image,
-	View,
-	ImageBackground,
-	StyleSheet,
-} from 'react-native';
+import { Text, TouchableOpacity, View, ImageBackground } from 'react-native';
 import { Login } from './loginScreenStyles';
 import BgrImage from '../../assets/Photo_BG.png';
 import { useState } from 'react';
+import { CustomInput } from '../../components/CustomComponents/CustomInput';
+import { CustomPasswordInput } from '../../components/CustomComponents/CustomPasswordInput';
+import { OrangeSubmitBtn } from '../../components/CustomComponents/OrangeSubmitBtn';
 
 export const LoginScreen = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -31,45 +24,29 @@ export const LoginScreen = () => {
 
 	return (
 		<View>
-
-<ImageBackground style={Login.container} source={BgrImage}>
-
-<View style={Login.form}>
-	<Text style={Login.title}>Увійти</Text>
-
-	<TextInput
-		style={onFocus ? Login.inputFocus : Login.input}
-		// style={Login.input}
-		placeholderTextColor="#BDBDBD"
-		placeholder="Адреса електронної пошти"
-		onFocus={handleOnFocus}
-		onBlur={handleOnBlur}
-	/>
-	<TextInput
-		style={
-			onFocus
-				? { ...Login.inputFocus, marginBottom: 45 }
-				: { ...Login.input, marginBottom: 45 }
-		}
-		// style={{ ...Login.input, marginBottom: 45 }}
-		placeholderTextColor="#BDBDBD"
-		placeholder="Пароль"
-		secureTextEntry={!showPassword}
-		onFocus={handleOnFocus}
-		onBlur={handleOnBlur}
-	/>
-	<TouchableOpacity onPress={handleShowPassword}>
-		<Text style={Login.showPasswordText}>{showPassword ? 'Приховати' : 'Показати'}</Text>
-	</TouchableOpacity>
-	<TouchableOpacity style={Login.button}>
-		<Text style={Login.btnDescr}>Увійти</Text>
-	</TouchableOpacity>
-	<TouchableOpacity>
-		<Text style={Login.linkToLogin}>Немає акаунту? Зареєструватися</Text>
-	</TouchableOpacity>
-</View>
-</ImageBackground>
+			<ImageBackground style={Login.container} source={BgrImage}>
+				<View style={Login.form}>
+					<Text style={Login.title}>Увійти</Text>
+					<CustomInput
+						placeholder="Адреса електронної пошти"
+						onFocus={handleOnFocus}
+						handleOnBlur={handleOnBlur}
+						handleOnFocus={handleOnFocus}
+					/>
+					<CustomPasswordInput
+						placeholder="Пароль"
+						handleOnBlur={handleOnBlur}
+						onFocus={onFocus}
+						handleOnFocus={handleOnFocus}
+						showPassword={showPassword}
+						handleShowPassword={handleShowPassword}
+					/>
+					<OrangeSubmitBtn text="Увійти" />
+					<TouchableOpacity>
+						<Text style={Login.linkToLogin}>Немає акаунту? Зареєструватися</Text>
+					</TouchableOpacity>
+				</View>
+			</ImageBackground>
 		</View>
-	
 	);
 };

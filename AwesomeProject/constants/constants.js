@@ -4,5 +4,5 @@ export const COLORS = {
     lightGrey : '#F6F6F6',
     middleGrey : '#E8E8E8',
     linkDarkBlue : '#1B4371',
-    titleDarkBlue : '#212121C',
+    titleDarkBlue : '#212121',
 }

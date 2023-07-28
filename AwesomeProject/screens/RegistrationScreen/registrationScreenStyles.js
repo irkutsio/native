@@ -25,54 +25,7 @@ export const Registration = StyleSheet.create({
 		fontSize: 30,
 		fontFamily: 'roboto-medium',
 	},
-	button: {
-		backgroundColor: COLORS.mainOrange,
-		borderRadius: 100,
-		paddingVertical: 16,
-		marginBottom: 14,
-	},
 
-	btnDescr: {
-		color: 'white',
-		textAlign: 'center',
-		fontFamily: 'roboto-regular',
-	},
-
-	input: {
-		width: 343,
-		height: 50,
-		backgroundColor: COLORS.lightGrey,
-		padding: 16,
-		fontSize: 16,
-		borderRadius: 8,
-		fontFamily: 'roboto-regular',
-		borderWidth: 1,
-		borderColor: COLORS.middleGrey,
-		marginBottom: 16,
-	},
-
-	inputFocus: {
-		borderColor: 'red',
-		width: 343,
-		height: 50,
-		backgroundColor: COLORS.lightGrey,
-		padding: 16,
-		fontSize: 16,
-		borderRadius: 8,
-		fontFamily: 'roboto-regular',
-		borderWidth: 1,
-		borderColor: COLORS.mainOrange,
-		marginBottom: 16,
-	},
-
-	showPasswordText: {
-		position: 'absolute',
-		top: -84,
-		right: 16,
-		fontFamily: 'roboto-regular',
-		fontSize: 16,
-		color: COLORS.linkDarkBlue,
-	},
 
 	linkToLogin: {
 		textAlign: 'center',
