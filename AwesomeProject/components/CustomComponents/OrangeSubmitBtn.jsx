@@ -1,9 +1,9 @@
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { COLORS } from '../../constants/constants';
 
-export const OrangeSubmitBtn = ({ text, handlePress }) => {
+export const OrangeSubmitBtn = ({ text, onPress }) => {
 	return (
-		<TouchableOpacity style={styles.button} onPress={handlePress}>
+		<TouchableOpacity style={styles.button} onPress={onPress}>
 			<Text style={styles.btnDescr}>{text}</Text>
 		</TouchableOpacity>
 	);

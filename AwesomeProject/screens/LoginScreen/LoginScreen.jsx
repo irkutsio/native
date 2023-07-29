@@ -5,21 +5,28 @@ import { useState } from 'react';
 import { CustomInput } from '../../components/CustomComponents/CustomInput';
 import { CustomPasswordInput } from '../../components/CustomComponents/CustomPasswordInput';
 import { OrangeSubmitBtn } from '../../components/CustomComponents/OrangeSubmitBtn';
+import { useForm } from 'react-hook-form';
+
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
 
 export const LoginScreen = () => {
 	const [showPassword, setShowPassword] = useState(false);
-	const [onFocus, setOnFocus] = useState(false);
+
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
+
+	const handleLoginPress = data => {
+		console.log(data);
+	};
 
 	const handleShowPassword = () => {
 		setShowPassword(prev => !prev);
-	};
-
-	const handleOnFocus = () => {
-		setOnFocus(true);
-	};
-
-	const handleOnBlur = () => {
-		setOnFocus(false);
 	};
 
 	return (
@@ -28,20 +35,28 @@ export const LoginScreen = () => {
 				<View style={Login.form}>
 					<Text style={Login.title}>Увійти</Text>
 					<CustomInput
+						name="email"
 						placeholder="Адреса електронної пошти"
-						onFocus={handleOnFocus}
-						handleOnBlur={handleOnBlur}
-						handleOnFocus={handleOnFocus}
+						control={control}
+						rules={{
+							required: 'email is required',
+							minLength: { value: 4, message: 'Should be minimum 4 symbols long' },
+							pattern: { value: emailRegex, message: 'email is invalid' },
+						}}
 					/>
 					<CustomPasswordInput
+						name="password"
 						placeholder="Пароль"
-						handleOnBlur={handleOnBlur}
-						onFocus={onFocus}
-						handleOnFocus={handleOnFocus}
 						showPassword={showPassword}
 						handleShowPassword={handleShowPassword}
+						control={control}
+						rules={{
+							required: 'password is required',
+							minLength: { value: 4, message: 'Should be minimum 4 symbols long' },
+							
+						}}
 					/>
-					<OrangeSubmitBtn text="Увійти" />
+					<OrangeSubmitBtn text="Увійти" onPress={handleSubmit(handleLoginPress)} />
 					<TouchableOpacity>
 						<Text style={Login.linkToLogin}>Немає акаунту? Зареєструватися</Text>
 					</TouchableOpacity>

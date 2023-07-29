@@ -1,26 +1,50 @@
 import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { COLORS } from '../../constants/constants';
+import { Controller } from 'react-hook-form';
 
 export const CustomPasswordInput = ({
+	control,
 	placeholder,
-	handleOnBlur,
-	handleOnFocus,
-	handleShowPassword,
+	name,
 	showPassword,
-	onFocus,
-  
+	handleShowPassword,
+	rules = {},
 }) => {
 	return (
 		<View>
-			<TextInput
-				// style={onFocus ? styles.inputFocus : styles.input}
-				style={styles.input}
-				placeholderTextColor="#BDBDBD"
-				placeholder={placeholder}
-				// onFocus={handleOnFocus}
-				// onBlur={handleOnBlur}
-				secureTextEntry={!showPassword}
+			<Controller
+				control={control}
+				name={name}
+				rules={rules}
+				render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+					<>
+						<TextInput
+							style={[styles.input, { borderColor: error ? 'red' : COLORS.middleGrey }]}
+							placeholderTextColor="#BDBDBD"
+							value={value}
+							onChangeText={onChange}
+							onBlur={onBlur}
+							placeholder={placeholder}
+							secureTextEntry={!showPassword}
+						/>
+						{error && (
+							<Text
+								style={{
+									color: 'red',
+								
+									position: 'absolute',
+									
+									top: 47,
+								
+								}}
+							>
+								{error.message || 'Error'}
+							</Text>
+						)}
+					</>
+				)}
 			/>
+
 			<TouchableOpacity onPress={handleShowPassword}>
 				<Text style={styles.showPasswordText}>{showPassword ? 'Приховати' : 'Показати'}</Text>
 			</TouchableOpacity>
@@ -43,12 +67,11 @@ const styles = StyleSheet.create({
 	},
 	showPasswordText: {
 		position: 'absolute',
-		top: -78,
+		top: -82,
 		right: 16,
 		fontFamily: 'roboto-regular',
 		fontSize: 16,
 		color: COLORS.linkDarkBlue,
-        
 	},
 	inputFocus: {
 		borderColor: 'red',

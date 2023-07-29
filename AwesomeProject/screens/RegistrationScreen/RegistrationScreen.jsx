@@ -1,32 +1,29 @@
-import { Text, TouchableOpacity, Image, View, ImageBackground } from 'react-native';
+import { Text, TouchableOpacity, Image, View, ImageBackground, TextInput } from 'react-native';
 import { Registration } from './registrationScreenStyles';
 import BgrImage from '../../assets/Photo_BG.png';
 import { useState } from 'react';
 import { CustomInput } from '../../components/CustomComponents/CustomInput';
 import { CustomPasswordInput } from '../../components/CustomComponents/CustomPasswordInput';
 import { OrangeSubmitBtn } from '../../components/CustomComponents/OrangeSubmitBtn';
+import { useForm } from 'react-hook-form';
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const RegistrationScreen = () => {
 	const [showPassword, setShowPassword] = useState(false);
-	const [onFocus, setOnFocus] = useState(false);
-	const [login, setLogin] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
+
+	const handleRegistrationPress = data => {
+		console.log(data);
+	};
 
 	const handleShowPassword = () => {
 		setShowPassword(prev => !prev);
-	};
-
-	const handleOnFocus = () => {
-		setOnFocus(true);
-	};
-
-	const handleOnBlur = () => {
-		setOnFocus(false);
-	};
-
-	const handleRegistrationPress = () => {
-		console.log('Кнопка нажата!');
 	};
 
 	return (
@@ -40,37 +37,39 @@ export const RegistrationScreen = () => {
 					<Text style={Registration.title}>Реєстрація</Text>
 
 					<CustomInput
+						name="login"
 						placeholder="Логін"
-						onFocus={handleOnFocus}
-						handleOnBlur={handleOnBlur}
-						handleOnFocus={handleOnFocus}
-						value={login}
-						setValue={setLogin}
+						control={control}
+						rules={{
+							required: 'login is required',
+							minLength: { value: 4, message: 'Should be minimum 4 symbols long' },
+						}}
 					/>
 
 					<CustomInput
+						name="email"
 						placeholder="Адреса електронної пошти"
-						onFocus={handleOnFocus}
-						handleOnBlur={handleOnBlur}
-						handleOnFocus={handleOnFocus}
-						value={email}
-						setValue={setEmail}
-					/>
-					<CustomPasswordInput
-						placeholder="Пароль"
-						handleOnBlur={handleOnBlur}
-						onFocus={onFocus}
-						handleOnFocus={handleOnFocus}
-						showPassword={showPassword}
-						handleShowPassword={handleShowPassword}
-						value={password}
-						setValue={setPassword}
+						control={control}
+						rules={{
+							required: 'email is required',
+							minLength: { value: 4, message: 'Should be minimum 4 symbols long' },
+							pattern: { value: emailRegex, message: 'email is invalid' }
+						}}
 					/>
 
-					<OrangeSubmitBtn
-						text="Зареєстуватися"
-						handlePress={handleRegistrationPress}
+					<CustomPasswordInput
+						name="password"
+						placeholder="Пароль"
+						showPassword={showPassword}
+						handleShowPassword={handleShowPassword}
+						control={control}
+						rules={{
+							required: 'password is required',
+							minLength: { value: 4, message: 'Should be minimum 4 symbols long' },
+						}}
 					/>
+
+					<OrangeSubmitBtn text="Зареєстуватися" onPress={handleSubmit(handleRegistrationPress)} />
 
 					<TouchableOpacity>
 						<Text style={Registration.linkToLogin}>Вже є акаунт? Увійти</Text>
