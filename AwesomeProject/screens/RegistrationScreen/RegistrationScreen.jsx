@@ -6,11 +6,13 @@ import { CustomInput } from '../../components/CustomComponents/CustomInput';
 import { CustomPasswordInput } from '../../components/CustomComponents/CustomPasswordInput';
 import { OrangeSubmitBtn } from '../../components/CustomComponents/OrangeSubmitBtn';
 import { useForm } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const RegistrationScreen = () => {
 	const [showPassword, setShowPassword] = useState(false);
+	const navigation = useNavigation();
 
 	const {
 		control,
@@ -20,6 +22,8 @@ export const RegistrationScreen = () => {
 
 	const handleRegistrationPress = data => {
 		console.log(data);
+
+		navigation.navigate('Home')
 	};
 
 	const handleShowPassword = () => {
@@ -53,7 +57,7 @@ export const RegistrationScreen = () => {
 						rules={{
 							required: 'email is required',
 							minLength: { value: 4, message: 'Should be minimum 4 symbols long' },
-							pattern: { value: emailRegex, message: 'email is invalid' }
+							pattern: { value: emailRegex, message: 'email is invalid' },
 						}}
 					/>
 
@@ -71,7 +75,9 @@ export const RegistrationScreen = () => {
 
 					<OrangeSubmitBtn text="Зареєстуватися" onPress={handleSubmit(handleRegistrationPress)} />
 
-					<TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => navigation.navigate('Login', { sessionId: 45, userId: '22e24' })}
+					>
 						<Text style={Registration.linkToLogin}>Вже є акаунт? Увійти</Text>
 					</TouchableOpacity>
 				</View>

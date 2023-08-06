@@ -10,6 +10,7 @@ export const Registration = StyleSheet.create({
 	},
 
 	form: {
+		height:'100%',
 		paddingTop: 92,
 		backgroundColor: 'white',
 		borderTopLeftRadius: 25,

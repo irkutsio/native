@@ -10,6 +10,7 @@ export const Login = StyleSheet.create({
 	},
 
 	form: {
+		height:'100%',
 		paddingTop: 32,
 		backgroundColor: 'white',
 		borderTopLeftRadius: 25,

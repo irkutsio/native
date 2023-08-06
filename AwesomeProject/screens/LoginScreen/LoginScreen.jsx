@@ -6,14 +6,13 @@ import { CustomInput } from '../../components/CustomComponents/CustomInput';
 import { CustomPasswordInput } from '../../components/CustomComponents/CustomPasswordInput';
 import { OrangeSubmitBtn } from '../../components/CustomComponents/OrangeSubmitBtn';
 import { useForm } from 'react-hook-form';
-
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-
-
 export const LoginScreen = () => {
 	const [showPassword, setShowPassword] = useState(false);
+	const navigation = useNavigation();
 
 	const {
 		control,
@@ -23,6 +22,8 @@ export const LoginScreen = () => {
 
 	const handleLoginPress = data => {
 		console.log(data);
+
+		navigation.navigate('Home');
 	};
 
 	const handleShowPassword = () => {
@@ -53,11 +54,10 @@ export const LoginScreen = () => {
 						rules={{
 							required: 'password is required',
 							minLength: { value: 4, message: 'Should be minimum 4 symbols long' },
-							
 						}}
 					/>
 					<OrangeSubmitBtn text="Увійти" onPress={handleSubmit(handleLoginPress)} />
-					<TouchableOpacity>
+					<TouchableOpacity onPress={() => navigation.navigate('Registration')}>
 						<Text style={Login.linkToLogin}>Немає акаунту? Зареєструватися</Text>
 					</TouchableOpacity>
 				</View>

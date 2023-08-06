@@ -1,10 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
-import { globalStyles } from './screens/RegistrationScreen/registrationScreenStyles';
 import { RegistrationScreen } from './screens/RegistrationScreen/RegistrationScreen';
 import { LoginScreen } from './screens/LoginScreen/LoginScreen';
-import { CustomInput } from './components/CustomComponents/CustomInput';
+import { NavigationContainer } from '@react-navigation/native';
+import { Home } from './screens/Home/Home';
+import { COLORS } from './constants/constants';
+import { HeaderLogOutBtn } from './components/CustomComponents/HeaderLogoutBtn';
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -16,12 +18,45 @@ export default function App() {
 	if (!fontsLoaded) {
 		return null;
 	}
-
+	const MainStack = createStackNavigator();
 	return (
-		<ScrollView>
-			<RegistrationScreen />
-			<LoginScreen />
-	
-		</ScrollView>
+		<NavigationContainer>
+			<MainStack.Navigator initialRouteName="Registration">
+				<MainStack.Screen
+					name="Home"
+					component={Home}
+					options={{
+						headerStyle: {
+							width: 375,
+							paddingHorizontal: 16,
+							borderBottomColor: COLORS.darkGrey,
+							borderBottomWidth: 1,
+						},
+						headerTitle: 'Публікації',
+						headerTitleStyle: {
+							color: COLORS.titleDarkBlue,
+							fontFamily: 'roboto-medium',
+							fontSize: 17,
+							backgroundColor: 'white',
+						},
+						headerTitleAlign: 'center',
+						headerRight: () => <HeaderLogOutBtn />,
+					}}
+				/>
+				<MainStack.Screen
+					name="Registration"
+					component={RegistrationScreen}
+					options={{ headerShown: false }}
+				/>
+				<MainStack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+			</MainStack.Navigator>
+		</NavigationContainer>
 	);
+}
+
+{
+	/* <ScrollView>
+<RegistrationScreen />
+<LoginScreen /> 
+ </ScrollView>  */
 }
