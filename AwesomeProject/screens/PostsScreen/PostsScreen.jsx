@@ -6,10 +6,10 @@ import userAvatar from '../../assets/user.png';
 export const PostsScreen = () => {
 	return (
 		<View style={styles.container}>
-			<View style={styles.qwerty}>
+			<View >
 				<Image style={styles.avatar} source={userAvatar}></Image>
 			</View>
-            <View style={styles.qwertyqwe}>
+            <View style={styles.userInfo}>
                 <Text style={styles.userName}>Natali Romanova</Text>
                 <Text style={styles.userEmail}>email@example.com</Text>
             </View>

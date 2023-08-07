@@ -17,6 +17,10 @@ export const styles = StyleSheet.create({
 	avatar: {
 		width: 60,
 	},
+	userInfo: {
+		marginTop: 8,
+	},
+
 	userName: {
 		color: COLORS.titleDarkBlue,
 		fontFamily: 'roboto-bold',
