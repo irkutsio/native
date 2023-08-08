@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Home } from './screens/Home/Home';
 import { COLORS } from './constants/constants';
 import { HeaderLogOutBtn } from './components/CustomComponents/HeaderLogoutBtn';
+import { CreatePostScreen } from './screens/CreatePostScreen/CreatePostScreen';
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -47,6 +48,26 @@ export default function App() {
 					name="Registration"
 					component={RegistrationScreen}
 					options={{ headerShown: false }}
+				/>
+				<MainStack.Screen
+					name="CreatePostScreen"
+					component={CreatePostScreen}
+					options={{
+						headerStyle: {
+							width: 375,
+							paddingHorizontal: 16,
+							borderBottomColor: COLORS.darkGrey,
+							borderBottomWidth: 1,
+						},
+						headerTitle: 'Створити публікацію',
+						headerTitleStyle: {
+							color: COLORS.titleDarkBlue,
+							fontFamily: 'roboto-medium',
+							fontSize: 17,
+							backgroundColor: 'white',
+						},
+						headerTitleAlign: 'center',
+					}}
 				/>
 				<MainStack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
 			</MainStack.Navigator>

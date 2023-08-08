@@ -23,7 +23,7 @@ export const RegistrationScreen = () => {
 	const handleRegistrationPress = data => {
 		console.log(data);
 
-		navigation.navigate('Home')
+		navigation.navigate('Home');
 	};
 
 	const handleShowPassword = () => {

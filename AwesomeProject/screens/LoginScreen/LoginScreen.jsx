@@ -24,6 +24,7 @@ export const LoginScreen = () => {
 		console.log(data);
 
 		navigation.navigate('Home');
+		// navigation.navigate('CreatePostScreen');
 	};
 
 	const handleShowPassword = () => {
