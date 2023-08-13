@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, View, ImageBackground } from 'react-native';
 import { Login } from './loginScreenStyles';
-import BgrImage from '../../assets/Photo_BG.png';
+import BgrImage from '../../assets/images/Photo_BG.png';
 import { useState } from 'react';
 import { CustomInput } from '../../components/CustomComponents/CustomInput';
 import { CustomPasswordInput } from '../../components/CustomComponents/CustomPasswordInput';
@@ -24,7 +24,7 @@ export const LoginScreen = () => {
 		console.log(data);
 
 		navigation.navigate('Home');
-		// navigation.navigate('CreatePostScreen');
+
 	};
 
 	const handleShowPassword = () => {

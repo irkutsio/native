@@ -1,6 +1,6 @@
-import { Text, TouchableOpacity, Image, View, ImageBackground, TextInput } from 'react-native';
+import { Text, TouchableOpacity, Image, View, ImageBackground} from 'react-native';
 import { Registration } from './registrationScreenStyles';
-import BgrImage from '../../assets/Photo_BG.png';
+import BgrImage from '../../assets/images/Photo_BG.png';
 import { useState } from 'react';
 import { CustomInput } from '../../components/CustomComponents/CustomInput';
 import { CustomPasswordInput } from '../../components/CustomComponents/CustomPasswordInput';
@@ -34,7 +34,7 @@ export const RegistrationScreen = () => {
 		<View>
 			<ImageBackground style={Registration.container} source={BgrImage}>
 				<View style={Registration.avatar}>
-					<Image source={require('../../assets/add.png')} style={Registration.add} />
+					<Image source={require('../../assets/images/add.png')} style={Registration.add} />
 				</View>
 
 				<View style={Registration.form}>

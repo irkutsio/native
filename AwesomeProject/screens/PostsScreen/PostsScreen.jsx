@@ -1,18 +1,20 @@
 import { Text, Image, View } from 'react-native';
 import { styles } from './PostScreenStyles';
-import { ScrollView } from 'react-native-gesture-handler';
-import userAvatar from '../../assets/user.png';
+import userAvatar from '../../assets/images/user.png';
+
+
 
 export const PostsScreen = () => {
 	return (
 		<View style={styles.container}>
-			<View >
+			<View>
 				<Image style={styles.avatar} source={userAvatar}></Image>
 			</View>
-            <View style={styles.userInfo}>
-                <Text style={styles.userName}>Natali Romanova</Text>
-                <Text style={styles.userEmail}>email@example.com</Text>
-            </View>
+			<View style={styles.userInfo}>
+				<Text style={styles.userName}>Natali Romanova</Text>
+				<Text style={styles.userEmail}>email@example.com</Text>
+		
+			</View>
 		</View>
 	);
 };
