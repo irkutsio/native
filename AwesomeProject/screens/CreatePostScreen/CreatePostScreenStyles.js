@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
 		paddingHorizontal: 16,
 		width: 375,
 		height: '100%',
+		
 		backgroundColor: 'white',
 		marginLeft: 'auto',
 		marginRight: 'auto',
@@ -80,7 +81,7 @@ export const styles = StyleSheet.create({
 		width:70,
 		height:40,
 		backgroundColor: COLORS.lightGrey,
-		marginTop: 'auto',
+		marginTop: 120,
 		marginLeft: 'auto',
 		marginRight: 'auto',
 		borderRadius : 20,
