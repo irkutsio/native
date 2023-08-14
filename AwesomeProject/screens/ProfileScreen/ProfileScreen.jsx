@@ -4,7 +4,7 @@ import { styles } from './ProfileScreenStyles';
 import { ProfilePost } from '../../components/CustomComponents/ProfilePost';
 import { DeleteIcon } from '../../components/SvgIcons/Deleteicon';
 import { BackArrowIcon } from '../../components/SvgIcons/BackArrowIcon';
-import { Logout } from '../../components/SvgIcons/LogOutIcon';
+import { Logout } from '../../components/SvgIcons/LogOutIcqwe9on';
 
 export const ProfileScreen = () => {
 	return (
