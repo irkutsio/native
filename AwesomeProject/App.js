@@ -5,6 +5,9 @@ import { RegistrationScreen } from './screens/RegistrationScreen/RegistrationScr
 import { LoginScreen } from './screens/LoginScreen/LoginScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { Home } from './screens/Home/Home';
+import { CommentsScreen } from './screens/CommentsScreen/CommentsScreen';
+import { COLORS } from './constants/constants';
+import { HeaderLogOutBtn } from './components/CustomComponents/HeaderLogoutBtn';
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -28,6 +31,21 @@ export default function App() {
 				/>
 
 				<MainStack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+				<MainStack.Screen
+					name="Comments"
+					component={CommentsScreen}
+					options={{
+						title: 'Коментарі',
+
+						headerTitleStyle: {
+							color: COLORS.titleDarkBlue,
+							fontFamily: 'roboto-medium',
+							fontSize: 17,
+							backgroundColor: 'white',
+						},
+						headerTitleAlign: 'center',
+					}}
+				/>
 			</MainStack.Navigator>
 		</NavigationContainer>
 	);
