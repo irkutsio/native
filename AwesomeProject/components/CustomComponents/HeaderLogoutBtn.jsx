@@ -1,5 +1,5 @@
 import { TouchableOpacity } from 'react-native';
-import { Logout } from '../SvgIcons/LogOutIcqwe9on';
+import { Logout } from '../SvgIcons/LogOutIcon';
 
 export const HeaderLogOutBtn = () => {
 	const handleLogOut = () => {};
