@@ -27,6 +27,7 @@ export const Home = () => {
 						);
 					} else if (route.name === 'CreatePostScreen') {
 						return (
+							
 							<View style={focused ? styles.focusedIcon : styles.iconWrapper}>
 								<BottomNavCenterIcon fill={focused ? 'white' : 'black'} />
 							</View>
@@ -76,6 +77,7 @@ export const Home = () => {
 						fontSize: 17,
 						backgroundColor: 'white',
 					},
+					tabBarStyle: { display: "none" },
 					headerTitleAlign: 'center',
 					headerLeft: () => <GoBackBtn />,
 				}}
