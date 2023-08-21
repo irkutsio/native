@@ -4,7 +4,14 @@ import { LikeIcon } from '../SvgIcons/LikeIcon';
 import { MapIcon } from '../SvgIcons/MapIcon';
 import { COLORS } from '../../constants/constants';
 
-export const ProfilePost = ({ source, signature, commentsQuantity, likesQuantity, location }) => {
+export const ProfilePost = ({
+	source,
+	signature,
+	commentsQuantity,
+	likesQuantity,
+	location,
+	onPress,
+}) => {
 	return (
 		<View>
 			<Image source={source} style={{ marginBottom: 8 }} />
@@ -19,7 +26,10 @@ export const ProfilePost = ({ source, signature, commentsQuantity, likesQuantity
 				{signature}
 			</Text>
 			<View style={styles.descr}>
-				<TouchableOpacity style={{ display: 'flex', flexDirection: 'row', gap: 6 }}>
+				<TouchableOpacity
+					style={{ display: 'flex', flexDirection: 'row', gap: 6 }}
+					onPress={onPress}
+				>
 					<CommentsIcon />
 					<Text style={{ fontFamily: 'roboto-regular', fontSize: 16, color: COLORS.titleDarkBlue }}>
 						{commentsQuantity}

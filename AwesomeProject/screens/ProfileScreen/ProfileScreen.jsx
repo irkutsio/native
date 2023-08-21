@@ -5,8 +5,14 @@ import { ProfilePost } from '../../components/CustomComponents/ProfilePost';
 import { DeleteIcon } from '../../components/SvgIcons/Deleteicon';
 import { BackArrowIcon } from '../../components/SvgIcons/BackArrowIcon';
 import { Logout } from '../../components/SvgIcons/LogOutIcon';
+import { useNavigation } from '@react-navigation/native';
 
 export const ProfileScreen = () => {
+	const navigation = useNavigation();
+
+	const onCommentsBtn = ()=>{
+		navigation.navigate('Comments');
+	}
 	return (
 		<ScrollView>
 			<ImageBackground style={styles.container} source={BgrImage}>
@@ -28,6 +34,7 @@ export const ProfileScreen = () => {
 						likesQuantity={8}
 						commentsQuantity={12}
 						location="Ukraine"
+						onPress={onCommentsBtn}
 					/>
 					<ProfilePost
 						source={require('../../assets/images/sunset.png')}
@@ -35,6 +42,7 @@ export const ProfileScreen = () => {
 						likesQuantity={3}
 						commentsQuantity={12}
 						location="Ukraine"
+						onPress={onCommentsBtn}
 					/>
 					<ProfilePost
 						source={require('../../assets/images/oldHouse.png')}
@@ -42,6 +50,7 @@ export const ProfileScreen = () => {
 						likesQuantity={50}
 						commentsQuantity={12}
 						location="Italy"
+						onPress={onCommentsBtn}
 					/>
 				</View>
 			</ImageBackground>

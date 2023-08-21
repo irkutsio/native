@@ -7,22 +7,31 @@ export const styles = StyleSheet.create({
 		paddingHorizontal: 16,
 		width: 375,
 		height: '100%',
-		
+
 		backgroundColor: 'white',
 		marginLeft: 'auto',
 		marginRight: 'auto',
 	},
 
-	placeholder: {
-		width: 343,
+	camera: {
+		width: '100%',
 		height: 240,
-		backgroundColor: COLORS.lightGrey,
+		// justifyContent: "center",
+		// alignItems: "center",
+		borderWidth: 1,
+		borderColor: COLORS.middleGrey,
 		borderRadius: 8,
-		position: 'relative',
 	},
 
-	cameraImg: {
+	cameraBtn: {
+		width: 60,
+		height: 60,
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
 		position: 'absolute',
+		borderRadius: 50,
+		backgroundColor: COLORS.lightGrey,
 		left: 141,
 		top: 90,
 	},
@@ -56,7 +65,6 @@ export const styles = StyleSheet.create({
 	},
 	location: {
 		position: 'relative',
-		
 	},
 	locationInput: {
 		width: 343,
@@ -67,26 +75,24 @@ export const styles = StyleSheet.create({
 		fontFamily: 'roboto-regular',
 		fontSize: 16,
 		paddingBottom: 15,
-		paddingLeft : 28,
+		paddingLeft: 28,
 	},
 
 	mapIcon: {
 		position: 'absolute',
 		top: 38,
 		left: 0,
-
 	},
 
-	binBtn :{
-		width:70,
-		height:40,
+	binBtn: {
+		width: 70,
+		height: 40,
 		backgroundColor: COLORS.lightGrey,
 		marginTop: 120,
 		marginLeft: 'auto',
 		marginRight: 'auto',
-		borderRadius : 20,
+		borderRadius: 20,
 		paddingHorizontal: 23,
-		paddingVertical: 8
-	}
-
+		paddingVertical: 8,
+	},
 });
