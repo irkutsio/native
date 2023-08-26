@@ -10,23 +10,43 @@ export const PostsScreen = () => {
 
 	const renderItem = ({ item }) => (
 		// console.log(item.image)
-		<ProfilePost source={item.image} signature={item.imgName} location={item.adress} />
+		<ProfilePost
+			source={item.image}
+			signature={item.imgName}
+			location={item.adress}
+			coords={item.location}
+		/>
 	);
 
 	return (
-		<View>
-			<View style={styles.container}>
-				<View>
-					<Image style={styles.avatar} source={userAvatar}></Image>
+		// <ScrollView>
+		// 	<View style={styles.container}>
+		// 		<View>
+		// 			<Image style={styles.avatar} source={userAvatar}></Image>
+		// 		</View>
+		// 		<View style={styles.userInfo}>
+		// 			<Text style={styles.userName}>Natali Romanova</Text>
+		// 			<Text style={styles.userEmail}>email@example.com</Text>
+		// 		</View>
+		// 	</View>
+		// 	<View>
+		<FlatList
+			style={styles.containerPost}
+			data={posts}
+			renderItem={renderItem}
+			ListHeaderComponent={
+				<View style={styles.container}>
+					<View>
+						<Image style={styles.avatar} source={userAvatar}></Image>
+					</View>
+					<View style={styles.userInfo}>
+						<Text style={styles.userName}>Natali Romanova</Text>
+						<Text style={styles.userEmail}>email@example.com</Text>
+					</View>
 				</View>
-				<View style={styles.userInfo}>
-					<Text style={styles.userName}>Natali Romanova</Text>
-					<Text style={styles.userEmail}>email@example.com</Text>
-				</View>
-			</View>
-			<View>
-				<FlatList style={styles.containerPost} data={posts} renderItem={renderItem} />
-			</View>
-		</View>
+			}
+		/>
+		// 	</View>
+		// </ScrollView>
 	);
 };

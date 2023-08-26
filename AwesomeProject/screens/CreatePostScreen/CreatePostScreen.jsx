@@ -20,7 +20,7 @@ export const CreatePostScreen = () => {
 	const [isDisabledBtn, setIsDisabledBtn] = useState(true);
 	const [location, setLocation] = useState(null);
 	const [adress, setAdress] = useState('');
-	const [imgName, setImgName] =  useState('');
+	const [imgName, setImgName] = useState('');
 
 	const dispatch = useDispatch();
 
@@ -67,17 +67,14 @@ export const CreatePostScreen = () => {
 				longitude: currentLocation.coords.longitude,
 			};
 			setLocation(coords);
-			/////////////////////////////////////////
-			// console.log(adress);
-			// console.log(location);
-			dispatch(createPost({ adress, location, image, imgName }));
-			/////////////////////////////////////////
+			console.log('>>>>>',location)
 		})();
+		dispatch(createPost({ adress, location, image, imgName }));
 		navigation.navigate('Home', { screen: 'PostsScreen' });
 		setLocation('');
 		setAdress('');
 		setImage(null);
-		setImgName('')
+		setImgName('');
 	};
 
 	return (
