@@ -8,6 +8,11 @@ import { Home } from './screens/Home/Home';
 import { CommentsScreen } from './screens/CommentsScreen/CommentsScreen';
 import { COLORS } from './constants/constants';
 import { HeaderLogOutBtn } from './components/CustomComponents/HeaderLogoutBtn';
+import { MapScreen } from './screens/MapScreen/MapScreen';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+
+
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -21,6 +26,7 @@ export default function App() {
 	}
 	const MainStack = createStackNavigator();
 	return (
+		<Provider store={store}>
 		<NavigationContainer>
 			<MainStack.Navigator initialRouteName="Registration">
 				<MainStack.Screen name="Home" component={Home} options={{ headerShown: false }} />
@@ -34,6 +40,7 @@ export default function App() {
 				<MainStack.Screen
 					name="Comments"
 					component={CommentsScreen}
+					// component={MapScreen}
 					options={{
 						title: 'Коментарі',
 
@@ -46,7 +53,23 @@ export default function App() {
 						headerTitleAlign: 'center',
 					}}
 				/>
+				<MainStack.Screen
+					name="MapScreen"
+					component={MapScreen}
+					options={{
+						title: 'Мапа',
+
+						headerTitleStyle: {
+							color: COLORS.titleDarkBlue,
+							fontFamily: 'roboto-medium',
+							fontSize: 17,
+							backgroundColor: 'white',
+						},
+						headerTitleAlign: 'center',
+					}}
+				/>
 			</MainStack.Navigator>
 		</NavigationContainer>
+		</Provider>
 	);
 }
