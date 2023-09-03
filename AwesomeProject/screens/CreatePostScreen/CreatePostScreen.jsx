@@ -12,6 +12,8 @@ import { COLORS } from '../../constants/constants';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { createPost } from '../../redux/postSlice';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
 export const CreatePostScreen = () => {
 	const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -26,6 +28,7 @@ export const CreatePostScreen = () => {
 
 	const navigation = useNavigation();
 
+	const postsCollectionRef = collection(db, 'posts');
 	const cameraRef = useRef(null);
 
 	useEffect(() => {
@@ -67,14 +70,14 @@ export const CreatePostScreen = () => {
 				longitude: currentLocation.coords.longitude,
 			};
 			setLocation(coords);
-			console.log('>>>>>',location)
+			await addDoc(postsCollectionRef, { adress, location: coords, image, imgName, commentsQuantity: 0 })
+			dispatch(createPost({ adress, location: coords, image, imgName, commentsQuantity: 0 }));
+			navigation.navigate('Home', { screen: 'PostsScreen' });
+			setLocation('');
+			setAdress('');
+			setImage(null);
+			setImgName('');
 		})();
-		dispatch(createPost({ adress, location, image, imgName }));
-		navigation.navigate('Home', { screen: 'PostsScreen' });
-		setLocation('');
-		setAdress('');
-		setImage(null);
-		setImgName('');
 	};
 
 	return (

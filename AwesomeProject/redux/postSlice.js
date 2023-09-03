@@ -18,3 +18,4 @@ export const postsSlice = createSlice({
 
 
 export const {createPost} = postsSlice.actions
+export const postsReducer = postsSlice.reducer

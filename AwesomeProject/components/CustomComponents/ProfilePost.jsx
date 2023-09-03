@@ -25,7 +25,7 @@ const navigation = useNavigation()
 	return (
 		<View>
 			<Image
-				source={{ uri: source }}
+				source={source}
 				resizeMode={'cover'}
 				style={{ marginBottom: 8, width: 343, height: 240 }}
 			/>

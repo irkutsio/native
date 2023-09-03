@@ -4,35 +4,63 @@ import userAvatar from '../../assets/images/user.png';
 import { FlatList } from 'react-native-gesture-handler';
 import { ProfilePost } from '../../components/CustomComponents/ProfilePost';
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { FIREBASE_AUTH } from '../../firebaseConfig';
+import { db } from '../../firebaseConfig';
+import { collection, getDocs } from 'firebase/firestore';
 
 export const PostsScreen = () => {
 	const posts = useSelector(state => state.posts.posts);
+	const postsCollectionRef = collection(db, 'posts');
 
-	const renderItem = ({ item }) => (
-		// console.log(item.image)
-		<ProfilePost
-			source={item.image}
-			signature={item.imgName}
-			location={item.adress}
-			coords={item.location}
-		/>
-	);
+	const [postsList, setPostsList] = useState([]);
+	const [user, setUser] = useState(null);
+
+	const auth = FIREBASE_AUTH;
+
+	useEffect(() => {
+		const getPostsList = async () => {
+			try {
+				const data = await getDocs(postsCollectionRef);
+				const filteredData = data.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+				console.log('>data>', filteredData);
+				setPostsList(filteredData);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getPostsList();
+	}, []);
+
+	const renderItem = ({ item }) => {
+		console.log('item',item)
+		if (!item.image) {
+			return;
+		}
+		return (
+			<ProfilePost
+				source={{ uri: item.image }}
+				signature={item.imgName}
+				location={item.adress}
+				coords={item.location}
+				commentsQuantity={item.commentsQuantity}
+			/>
+		);
+	};
+
+	useEffect(() => {
+		const unsubscribe = auth.onAuthStateChanged(user => {
+			setUser(user);
+		});
+		return () => {
+			unsubscribe();
+		};
+	}, []);
 
 	return (
-		// <ScrollView>
-		// 	<View style={styles.container}>
-		// 		<View>
-		// 			<Image style={styles.avatar} source={userAvatar}></Image>
-		// 		</View>
-		// 		<View style={styles.userInfo}>
-		// 			<Text style={styles.userName}>Natali Romanova</Text>
-		// 			<Text style={styles.userEmail}>email@example.com</Text>
-		// 		</View>
-		// 	</View>
-		// 	<View>
 		<FlatList
 			style={styles.containerPost}
-			data={posts}
+			data={postsList}
 			renderItem={renderItem}
 			ListHeaderComponent={
 				<View style={styles.container}>
@@ -40,13 +68,11 @@ export const PostsScreen = () => {
 						<Image style={styles.avatar} source={userAvatar}></Image>
 					</View>
 					<View style={styles.userInfo}>
-						<Text style={styles.userName}>Natali Romanova</Text>
-						<Text style={styles.userEmail}>email@example.com</Text>
+						<Text style={styles.userName}>{user ? user.displayName : ''}</Text>
+						<Text style={styles.userEmail}>{user ? user.email : ''}</Text>
 					</View>
 				</View>
 			}
 		/>
-		// 	</View>
-		// </ScrollView>
 	);
 };

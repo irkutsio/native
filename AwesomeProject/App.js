@@ -10,7 +10,8 @@ import { COLORS } from './constants/constants';
 import { HeaderLogOutBtn } from './components/CustomComponents/HeaderLogoutBtn';
 import { MapScreen } from './screens/MapScreen/MapScreen';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import { persistor, store } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 
@@ -27,6 +28,7 @@ export default function App() {
 	const MainStack = createStackNavigator();
 	return (
 		<Provider store={store}>
+			  <PersistGate loading={null} persistor={persistor}>
 		<NavigationContainer>
 			<MainStack.Navigator initialRouteName="Registration">
 				<MainStack.Screen name="Home" component={Home} options={{ headerShown: false }} />
@@ -70,6 +72,7 @@ export default function App() {
 				/>
 			</MainStack.Navigator>
 		</NavigationContainer>
+		      </PersistGate>
 		</Provider>
 	);
 }
