@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { FIREBASE_AUTH } from '../../firebaseConfig';
 import { db } from '../../firebaseConfig';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 
 export const PostsScreen = () => {
 	const posts = useSelector(state => state.posts.posts);
@@ -19,21 +19,31 @@ export const PostsScreen = () => {
 	const auth = FIREBASE_AUTH;
 
 	useEffect(() => {
-		const getPostsList = async () => {
-			try {
-				const data = await getDocs(postsCollectionRef);
-				const filteredData = data.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-				console.log('>data>', filteredData);
-				setPostsList(filteredData);
-			} catch (error) {
-				console.log(error);
-			}
+		const unsubscribe = onSnapshot(postsCollectionRef, querySnapshot => {
+			const updatedPosts = [];
+			querySnapshot.forEach(doc => {
+				updatedPosts.push({ ...doc.data(), id: doc.id });
+			});
+			setPostsList(updatedPosts);
+		});
+		return () => {
+			unsubscribe();
 		};
-		getPostsList();
+	}, []);
+
+
+
+	useEffect(() => {
+		const unsubscribe = auth.onAuthStateChanged(user => {
+			setUser(user);
+		});
+		return () => {
+			unsubscribe();
+		};
 	}, []);
 
 	const renderItem = ({ item }) => {
-		console.log('item',item)
+		console.log('item', item);
 		if (!item.image) {
 			return;
 		}
@@ -44,18 +54,10 @@ export const PostsScreen = () => {
 				location={item.adress}
 				coords={item.location}
 				commentsQuantity={item.commentsQuantity}
+				id={item.id}
 			/>
 		);
 	};
-
-	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged(user => {
-			setUser(user);
-		});
-		return () => {
-			unsubscribe();
-		};
-	}, []);
 
 	return (
 		<FlatList
@@ -76,3 +78,17 @@ export const PostsScreen = () => {
 		/>
 	);
 };
+
+// useEffect(() => {
+// 	const getPostsList = async () => {
+// 		try {
+// 			const data = await getDocs(postsCollectionRef);
+// 			const filteredData = data.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+// 			console.log('>data>', filteredData);
+// 			setPostsList(filteredData);
+// 		} catch (error) {
+// 			console.log(error);
+// 		}
+// 	};
+// 	getPostsList();
+// }, []);

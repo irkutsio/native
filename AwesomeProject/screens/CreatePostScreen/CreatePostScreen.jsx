@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { createPost } from '../../redux/postSlice';
 import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../../firebaseConfig';
+import { FIREBASE_AUTH, db } from '../../firebaseConfig';
 
 export const CreatePostScreen = () => {
 	const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -24,9 +24,12 @@ export const CreatePostScreen = () => {
 	const [adress, setAdress] = useState('');
 	const [imgName, setImgName] = useState('');
 
+
 	const dispatch = useDispatch();
 
 	const navigation = useNavigation();
+
+	const auth = FIREBASE_AUTH;
 
 	const postsCollectionRef = collection(db, 'posts');
 	const cameraRef = useRef(null);
@@ -57,6 +60,7 @@ export const CreatePostScreen = () => {
 	}
 
 	const addPost = () => {
+	
 		(async () => {
 			let { status } = await Location.requestForegroundPermissionsAsync();
 			if (status !== 'granted') {
@@ -70,7 +74,14 @@ export const CreatePostScreen = () => {
 				longitude: currentLocation.coords.longitude,
 			};
 			setLocation(coords);
-			await addDoc(postsCollectionRef, { adress, location: coords, image, imgName, commentsQuantity: 0 })
+			await addDoc(postsCollectionRef, {
+				adress,
+				location: coords,
+				image,
+				imgName,
+				commentsQuantity: 0,
+				userId: auth?.currentUser?.uid,
+			});
 			dispatch(createPost({ adress, location: coords, image, imgName, commentsQuantity: 0 }));
 			navigation.navigate('Home', { screen: 'PostsScreen' });
 			setLocation('');
@@ -78,6 +89,7 @@ export const CreatePostScreen = () => {
 			setImage(null);
 			setImgName('');
 		})();
+	
 	};
 
 	return (
@@ -131,7 +143,12 @@ export const CreatePostScreen = () => {
 						Опублікувати
 					</Text>
 				</TouchableOpacity>
-				<TouchableOpacity style={styles.binBtn}>
+				<TouchableOpacity
+					style={styles.binBtn}
+					onPress={() => {
+						setImage(null);
+					}}
+				>
 					<CreatePostBottomBin />
 				</TouchableOpacity>
 			</View>
