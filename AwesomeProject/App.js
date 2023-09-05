@@ -28,7 +28,7 @@ export default function App() {
 	const MainStack = createStackNavigator();
 	return (
 		<Provider store={store}>
-			  <PersistGate loading={null} persistor={persistor}>
+			  {/* <PersistGate loading={null} persistor={persistor}> */}
 		<NavigationContainer>
 			<MainStack.Navigator initialRouteName="Registration">
 				<MainStack.Screen name="Home" component={Home} options={{ headerShown: false }} />
@@ -72,7 +72,7 @@ export default function App() {
 				/>
 			</MainStack.Navigator>
 		</NavigationContainer>
-		      </PersistGate>
+		      {/* </PersistGate> */}
 		</Provider>
 	);
 }

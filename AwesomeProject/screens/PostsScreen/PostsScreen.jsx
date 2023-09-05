@@ -43,7 +43,7 @@ export const PostsScreen = () => {
 	}, []);
 
 	const renderItem = ({ item }) => {
-		console.log('item', item);
+		// console.log('item', item);
 		if (!item.image) {
 			return;
 		}

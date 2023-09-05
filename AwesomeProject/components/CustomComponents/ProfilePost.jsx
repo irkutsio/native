@@ -6,7 +6,7 @@ import { COLORS } from '../../constants/constants';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-export const ProfilePost = ({ source, signature, commentsQuantity, location, coords }) => {
+export const ProfilePost = ({ source, signature, commentsQuantity, location, coords, id }) => {
 	const [likesQuantity, setLikesQuantity] = useState(0);
 
 	const navigation = useNavigation();
@@ -42,7 +42,7 @@ export const ProfilePost = ({ source, signature, commentsQuantity, location, coo
 				<TouchableOpacity
 					style={{ display: 'flex', flexDirection: 'row', gap: 6 }}
 					onPress={() => {
-						navigation.navigate('Comments', {source});
+						navigation.navigate('Comments', { source, id });
 					}}
 				>
 					<CommentsIcon />
