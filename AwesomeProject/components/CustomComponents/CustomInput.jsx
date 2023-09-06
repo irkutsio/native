@@ -5,14 +5,6 @@ import { Controller } from 'react-hook-form';
 export const CustomInput = ({ control, name, placeholder, rules = {} }) => {
 	return (
 		<View>
-			{/* <TextInput
-				style={styles.input}
-				placeholderTextColor="#BDBDBD"
-				placeholder={placeholder}
-				// value={value}
-				onChangeText={onChange}
-			/> */}
-
 			<Controller
 				control={control}
 				name={name}

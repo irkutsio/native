@@ -34,7 +34,7 @@ export const LoginScreen = () => {
 		const unsubscribe = auth.onAuthStateChanged(user => {
 			setIsLoading(false);
 			if (user) {
-				// console.log('>>>>', user);
+			
 				navigation.navigate('Home');
 			}
 		});
@@ -52,7 +52,7 @@ export const LoginScreen = () => {
 		setIsLoading(true);
 		try {
 			const response = await signInWithEmailAndPassword(auth, email, password);
-			// console.log(response)
+		
 			dispatch(userLogin({ email, password }));
 			navigation.navigate('Home');
 			return response.user;

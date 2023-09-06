@@ -21,6 +21,22 @@ export const styles = StyleSheet.create({
 		borderWidth: 2,
 		borderColor: COLORS.darkGrey,
 	},
+	messageContent: {
+		fontFamily: 'roboto-regular',
+		fontSize: 13,
+		color: COLORS.titleDarkBlue,
+		marginBottom: 8,
+	},
+
+	message: {
+		width: 299,
+		paddingHorizontal: 16,
+		paddingTop: 16,
+		paddingBottom: 16,
+		backgroundColor: COLORS.lightGrey,
+		borderRadius: 6,
+		
+	},
 
 	time: {
 		fontFamily: 'roboto-regular',
@@ -30,16 +46,16 @@ export const styles = StyleSheet.create({
 		color: COLORS.darkGrey,
 	},
 	commentsContainer: {
-		flex: 1, 
-	  },
+		flex: 1,
+	},
 	commentInputContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginTop: 'auto', 
-	  },
+		marginTop: 'auto',
+	},
 	input: {
 		width: 343,
-        marginBottom: 16,
+		marginBottom: 16,
 		backgroundColor: COLORS.lightGrey,
 		height: 50,
 		padding: 16,

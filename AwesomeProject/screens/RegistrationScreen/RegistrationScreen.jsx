@@ -133,35 +133,3 @@ export const RegistrationScreen = () => {
 
 
 
-
-
-
-	// const handleRegistrationPress = data => {
-	// 	setIsLoading(true);
-	// 	const { email, login, password } = data;
-	// 	setLogin(login);
-	// 	createUserWithEmailAndPassword(auth, email, password)
-	// 		.then(response => {
-	// 			const user = response.user;
-	// 			updateUserProfile(user);
-	// 			console.log('>>>>>', user);
-	// 			dispatch(createAccount({ email, password }));
-	// 		})
-	// 		.catch(error => {
-	// 			alert('Registration failed: ' + error.message);
-	// 		});
-
-	// 	navigation.navigate('Home');
-
-	// 	setIsLoading(false);
-	// };
-
-	// const updateUserProfile = async (user) => {
-	// 	if (user) {
-	// 		try {
-	// 			await updateProfile(user,{ displayName: login });
-	// 		} catch (error) {
-	// 			throw error;
-	// 		}
-	// 	}
-	// };

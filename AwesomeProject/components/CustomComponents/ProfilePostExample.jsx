@@ -3,16 +3,8 @@ import { CommentsIcon } from '../SvgIcons/CommentsIcon';
 import { LikeIcon } from '../SvgIcons/LikeIcon';
 import { MapIcon } from '../SvgIcons/MapIcon';
 import { COLORS } from '../../constants/constants';
-import { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { useComments } from '../../hooks/getComment';
 
-export const ProfilePost = ({ source, signature, commentsQuantity, location, coords, postId }) => {
-	const [likesQuantity, setLikesQuantity] = useState(0);
-	const { comments, loading } = useComments(postId);
-
-	const navigation = useNavigation();
-
+export const ProfilePostExample = ({ source, signature, commentsQuantity, location, likesQuantity }) => {
 	return (
 		<View>
 			<Image
@@ -38,20 +30,15 @@ export const ProfilePost = ({ source, signature, commentsQuantity, location, coo
 				{signature}
 			</Text>
 			<View style={styles.descr}>
-				<TouchableOpacity
-					style={{ display: 'flex', flexDirection: 'row', gap: 6 }}
-					onPress={() => {
-						navigation.navigate('Comments', { source, postId });
-					}}
-				>
+				<TouchableOpacity style={{ display: 'flex', flexDirection: 'row', gap: 6 }}>
 					<CommentsIcon />
 					<Text style={{ fontFamily: 'roboto-regular', fontSize: 16, color: COLORS.titleDarkBlue }}>
-						{comments?.length}
+						{commentsQuantity}
 					</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
 					style={{ display: 'flex', flexDirection: 'row', gap: 6 }}
-					onPress={() => setLikesQuantity(prev => prev + 1)}
+				
 				>
 					<LikeIcon />
 					<Text style={{ fontFamily: 'roboto-regular', fontSize: 16, color: COLORS.titleDarkBlue }}>
@@ -59,9 +46,6 @@ export const ProfilePost = ({ source, signature, commentsQuantity, location, coo
 					</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
-					onPress={() => {
-						navigation.navigate('MapScreen', { coords });
-					}}
 					style={{ display: 'flex', flexDirection: 'row', gap: 4, marginLeft: 'auto' }}
 				>
 					<MapIcon />

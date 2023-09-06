@@ -9,12 +9,14 @@ import { FIREBASE_AUTH } from '../../firebaseConfig';
 import { db } from '../../firebaseConfig';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 
+
 export const PostsScreen = () => {
-	const posts = useSelector(state => state.posts.posts);
+	// const posts = useSelector(state => state.posts.posts);
 	const postsCollectionRef = collection(db, 'posts');
 
 	const [postsList, setPostsList] = useState([]);
 	const [user, setUser] = useState(null);
+
 
 	const auth = FIREBASE_AUTH;
 
@@ -31,8 +33,6 @@ export const PostsScreen = () => {
 		};
 	}, []);
 
-
-
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(user => {
 			setUser(user);
@@ -43,21 +43,24 @@ export const PostsScreen = () => {
 	}, []);
 
 	const renderItem = ({ item }) => {
-		// console.log('item', item);
+		console.log(item)
 		if (!item.image) {
 			return;
 		}
+
 		return (
 			<ProfilePost
 				source={{ uri: item.image }}
 				signature={item.imgName}
 				location={item.adress}
 				coords={item.location}
-				commentsQuantity={item.commentsQuantity}
-				id={item.id}
+				// commentsQuantity={item.commentsQuantity}
+				postId={item.id}
 			/>
 		);
 	};
+
+
 
 	return (
 		<FlatList
