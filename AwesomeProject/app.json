@@ -1,6 +1,5 @@
 {
   "expo": {
-
     "name": "AwesomeProject",
     "slug": "AwesomeProject",
     "version": "1.0.0",
@@ -23,10 +22,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.irakutsevol.AwesomeProject"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f65ea93e-60cf-4a1f-9ed3-386e7b5eb33c"
+      }
     }
   }
 }
